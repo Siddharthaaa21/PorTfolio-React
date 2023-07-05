@@ -18,6 +18,9 @@ import { Container, Navbarn } from 'react-bootstrap';
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  const onUpdateActiveLink = (value) => {
+    setActiveLink(value);
+  };//this is for the active link in the navbar to be highlighted when clicked on it
   
     ///scollY is the number of pixels that the document is currently scrolled vertically
    
