@@ -51,6 +51,7 @@ import navIcon3 from '../assets/nav-icon3.svg';
         </div>
          <button className="vvd" onClick={()=>console.log('connect')}></button><span>lets connect!</span>
           </span>
+          //vvd is the button that is in the navbar and it is for the lets connect button
         </Navbar.Collapse>
       </Container>
     </Navbar>
