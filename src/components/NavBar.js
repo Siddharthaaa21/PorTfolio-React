@@ -35,22 +35,22 @@ import navIcon3 from '../assets/nav-icon3.svg';
     <Navbar  expand="lg" className={scolled ? "scolled" : ""}>
       <Container>
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <img src={''} alt="Logo" />
+        <img src={'logo'} alt="Logo" />
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home" className={activeLink ==='home' ? 'active navbar-link' : 'navbar-link'} onclick={()=> onUpdateActiveLink("Home")}>Home</Nav.Link>
             <Nav.Link href="#skills"className={activeLink ==='skills' ? 'active navbar-link' : 'navbar-link'}onclick={()=> onUpdateActiveLink("Skills")}>skills</Nav.Link>
             <Nav.Link href="#projects"className={activeLink ==='projects' ? 'active navbar-link' : 'navbar-link'}onclick={()=> onUpdateActiveLink("Projects")}>projects</Nav.Link>
-
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
+       </Nav>
+       <span className="navbar-text">
+        <div className="social-icons">
+          <a href="#"><img src={navIcon1} alt="icon1" /></a> 
+          <a href="#"><img src={navIcon2} alt="icon2" /></a>
+          <a href="#"><img src={navIcon3} alt="icon3" /></a>
+        </div>
+         <button className="vvd" onClick={()=>console.log('connect')}></button><span>lets connect!</span>
+          </span>
         </Navbar.Collapse>
       </Container>
     </Navbar>
