@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react';
 
 import { Container, Navbarn } from 'react-bootstrap';
+import logo from '../assets/img/logo.svg';
+import navIcon1 from '../assets/nav-icon1.svg';
+import navIcon2 from '../assets/nav-icon2.svg';
+import navIcon3 from '../assets/nav-icon3.svg';
+//just for the navbar icons
+
+
 
  export const YourNavbarComponent = () => {
   const [activwLink, setActiveLink] = useState('home');
