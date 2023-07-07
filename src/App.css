@@ -33,6 +33,13 @@ body{
   color: #fff !important; 
   font-family: 'Centra', sans-serif !important;
 }
+h1,h2,h3,h4,h5,h6{/* is for the font family*/
+  margin: 0;
+  padding:0;
+  line-height: normal;
+ 
+
+}
 .App {
   text-align: center;
 }
