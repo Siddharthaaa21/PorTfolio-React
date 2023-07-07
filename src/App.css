@@ -13,6 +13,26 @@
   src:url('./assets/font/CentraNo2-Book.ttf');
   font-weight:400;
 }
+
+* {/*this is for css*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+html{
+  scroll-behavior: smooth;  /*for smooth scrolling*/
+  scroll-padding-top: 75px; /*for smooth scrolling also*/
+
+}
+body{
+  font-weight: 400;
+  overflow-x: hidden;
+  position: relative;/* position:relative is for the absolute position of the navbar*/
+  background-color: #121212 !important; /*because sometimes bootstrap overrides the background color*/
+  color: #fff !important; 
+  font-family: 'Centra', sans-serif !important;
+}
 .App {
   text-align: center;
 }
