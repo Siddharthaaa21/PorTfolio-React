@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -6,6 +7,12 @@ function App() {
     <div className="App">
       
     </div>
+  );
+}
+
+function App2() {
+  return (
+     <Footer />
   );
 }
 
