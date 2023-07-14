@@ -1,25 +1,43 @@
-import{Container,Row,Col} from 'react-bootstrap';
-import { MailchipForm} from "MailchipForm.";
-import logo form "../assets/img/logo.svg"
- 
-export const Footer=()=>{
+import {Container }  from "react-bootstrap"
+//importing Container from react-bootstrap library used to create  fixed width container
+import {MailchimpForm} from "./MailchimpForm"
+//is a component which is used to create a form for mailchimp custom , since we have created a sepreate container for mailchimp form 
+import logo from "../assets/img/logo.svg"
+
+export const Footer =()=>{
+
+    //using export of making this user defined function make use anywhere in the project
     return(
-        <footer className="footer">
-            <Container>
-                <Row className= "align-item-center">
-                <MailchimpForm/>
-                <Col sm={6}>// for small screen 6 column
-                <img src={logo} alt="Logo"/>
-                </Col>
-                <Col sm={6} className="text-centre text-sm-end">
-                <div className="socail-icon">
-                <a href=""><img</a>
-                </div>
-                //again because of small screen 6 column 
+       <footer className="footer">
+        <Container>
+            <Row className="align-item-centre ">
+                {/* /*align-item-centre is used to align the content in the centre*/ }
+                <MailchimpForm>
+                    <Col sm={6}>
+                       <img src ={logo} alt="logo" className="logo"/>
+                    </Col>
+                    <Col sm ={6} className="text-center text sm-end ">
+                        {/* sm for  is a prop used to define coloum width  and we are usinf css classes */}
+                      {/* Col is basically for representing coloum in the row block */}
+                      <div className="social-icon">
+                        <a href=""><img src={navIcon1} /></a>
+                        <a href=""><img src={navIcon2} /></a>
+                        <a href=""><img src={navIcon3} /></a>
+                        </div>
 
-                </Col>
 
-                </Row>
-                </Container>
-         
-           
+
+                      </div>
+                    </Col>
+                </MailchimpForm>
+
+
+
+            </Row>
+        </Container>
+
+
+       </footer>
+          
+    )
+}
