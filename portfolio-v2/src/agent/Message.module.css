@@ -1,0 +1,97 @@
+/* Message — one conversation turn. User bubbles right, agent prose left. */
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+.agent {
+  justify-content: flex-start;
+}
+
+/* User bubble: accent-tinted, compact, capped width. */
+.bubble {
+  max-width: 80%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border-bottom-right-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  color: var(--fg);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Agent side: no bubble — reads as first-person prose with a trace above it. */
+.agentInner {
+  max-width: 92%;
+  display: flex;
+  flex-direction: column;
+}
+
+.answer {
+  margin: 0;
+  color: var(--fg);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.word {
+  /* inline so words flow as normal text */
+  display: inline;
+}
+
+/* Blinking caret while the answer streams. */
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Refusal: calm, muted, on-brand — not an error, just a polite decline. */
+.refusal {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid color-mix(in srgb, var(--accent-2) 60%, var(--border));
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    animation: none;
+    opacity: 0.7;
+  }
+}

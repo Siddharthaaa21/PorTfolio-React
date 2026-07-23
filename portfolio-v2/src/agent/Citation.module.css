@@ -1,0 +1,36 @@
+/* Citation — inline source chip. The wrap keeps anchors from underlining the chip. */
+.wrap {
+  display: inline-flex;
+  vertical-align: baseline;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.chip {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.5rem;
+  gap: 1px;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.wrap:hover .chip,
+.wrap:focus-visible .chip {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
+}
+
+.bracket {
+  color: var(--accent-2);
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.text {
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "identity": {
+    "name": "Siddhartha Arora",
+    "title": "Software Engineer · Agentic AI",
+    "tagline": "I build production LLM & GenAI systems — and distributed backends.",
+    "location": "India",
+    "email": "siddharthaarora2131@gmail.com",
+    "links": {
+      "github": "TODO",
+      "linkedin": "TODO",
+      "portfolio": "TODO"
+    }
+  },
+  "personas": {
+    "recruiter": { "focus": "fit, outcomes, availability", "depth": "concise" },
+    "engineer": { "focus": "architecture, trade-offs, stack", "depth": "detailed" },
+    "founder": { "focus": "impact, ROI, delivery speed", "depth": "outcome-first" }
+  },
+  "experience": [
+    {
+      "id": "infosys",
+      "company": "Infosys",
+      "role": "Specialist Programmer",
+      "period": "Mar 2026 – Present",
+      "summary": "I own the architecture and deployment of LLM-powered GenAI systems for enterprise clients.",
+      "highlights": [
+        "Architected LLM/GenAI pipelines with Python, LangChain and LangGraph — cut manual intervention 40% across 2 enterprise clients.",
+        "Led architecture proposals (planner-executor vs sequential chains) with FastAPI; onboarded 3 model integrations in one sprint.",
+        "Built structured observability that caught 100% of agent guardrail violations before customer impact.",
+        "Shipped on 2-week Agile sprints via CI/CD across remote teams."
+      ],
+      "tags": ["LLM", "LangGraph", "FastAPI", "observability", "Agile"]
+    },
+    {
+      "id": "bookedeat",
+      "company": "BookedEat",
+      "role": "Software Engineer — Contract",
+      "period": "Jun 2025 – Present",
+      "summary": "I do distributed-systems design for a production mobile app — sync, consistency and recovery.",
+      "highlights": [
+        "Designed delta-sync with sync cursors and tombstone delete propagation; reasoned carefully about eventual consistency and clock skew.",
+        "Built backward-compatible incremental sync APIs plus recovery paths; cut redundant API calls from 5+ to near-zero on warm loads."
+      ],
+      "tags": ["distributed-systems", "delta-sync", "eventual-consistency", "REST APIs"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "genai-app",
+      "name": "Generative AI LLM Application",
+      "stack": ["Python", "LangChain", "LangGraph", "FastAPI", "Azure", "Docker", "CI/CD"],
+      "period": "Jan 2025 – Present",
+      "summary": "A stateful, distributed LLM orchestration system deployed on Azure with output guardrails.",
+      "highlights": [
+        "Stateful LangGraph orchestration over 5+ workflow chains with output guardrails — 60% reduction in task-creation time.",
+        "Azure CI/CD via GitHub Actions and Docker — 80%+ test coverage, deploy time cut from 45 to 8 minutes.",
+        "Designed a planner-executor agent loop with retrieval, so each step is grounded in source data."
+      ]
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "JavaScript", "Java", "SQL"],
+    "genai": ["LangChain", "LangGraph", "RAG", "prompt engineering", "MCP", "LLM inferencing"],
+    "distributed": ["delta sync", "sync cursors", "eventual consistency", "fault tolerance"],
+    "cloud": ["Azure (AZ-900)", "AWS", "Docker", "GitHub Actions", "CI/CD", "Git"],
+    "backend": ["FastAPI", "REST APIs", "structured logging", "observability"],
+    "databases": ["PostgreSQL", "MongoDB", "SQLite", "MySQL", "Redis"]
+  },
+  "facts": [
+    {
+      "id": "f-llm-40",
+      "text": "I cut manual intervention 40% with LangChain/LangGraph pipelines at Infosys, across 2 enterprise clients.",
+      "sourceLabel": "Infosys · resume"
+    },
+    {
+      "id": "f-arch-proposals",
+      "text": "I led architecture proposals weighing planner-executor against sequential chains with FastAPI, and onboarded 3 model integrations in a single sprint.",
+      "sourceLabel": "Infosys · resume"
+    },
+    {
+      "id": "f-guardrails",
+      "text": "My observability layer caught 100% of agent guardrail violations before customer impact.",
+      "sourceLabel": "Infosys · resume"
+    },
+    {
+      "id": "f-agile-cicd",
+      "text": "I ship on 2-week Agile sprints via CI/CD across remote teams.",
+      "sourceLabel": "Infosys · resume"
+    },
+    {
+      "id": "f-deltasync",
+      "text": "I designed delta-sync with sync cursors and tombstones at BookedEat, cutting redundant API calls from 5+ to near-zero on warm loads.",
+      "sourceLabel": "BookedEat · resume"
+    },
+    {
+      "id": "f-consistency",
+      "text": "I reasoned about eventual consistency and clock skew to keep a production mobile app's offline data correct after reconnect.",
+      "sourceLabel": "BookedEat · resume"
+    },
+    {
+      "id": "f-langgraph-orchestration",
+      "text": "I built stateful LangGraph orchestration over 5+ workflow chains with output guardrails, which gave a 60% reduction in task-creation time.",
+      "sourceLabel": "GenAI project · resume"
+    },
+    {
+      "id": "f-azure-cicd",
+      "text": "I ship to Azure via GitHub Actions and Docker with 80%+ coverage; deploy time dropped from 45 to 8 minutes.",
+      "sourceLabel": "GenAI project · resume"
+    },
+    {
+      "id": "f-az900",
+      "text": "I'm Microsoft Certified: Azure Fundamentals (AZ-900).",
+      "sourceLabel": "certifications · resume"
+    },
+    {
+      "id": "f-rag",
+      "text": "I build RAG systems so the model's answers stay grounded in retrieved source data instead of hallucinating.",
+      "sourceLabel": "skills · resume"
+    },
+    {
+      "id": "f-availability",
+      "text": "I'm open to contract work, including short agentic-AI engagements, and I'm comfortable shipping fast in Agile sprints.",
+      "sourceLabel": "availability"
+    }
+  ]
+}

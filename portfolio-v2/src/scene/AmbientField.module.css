@@ -1,0 +1,95 @@
+/* AmbientField wrapper — Tab 2.
+   A fixed, full-screen layer that lives BEHIND all content. It never receives
+   pointer events and never traps focus. Token-driven only (see tokens.css). */
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* base wash so the canvas fades into the page bg with no hard seam */
+  background: var(--bg);
+  /* the canvas paints on top of this; isolate keeps blend modes local */
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* the r3f <Canvas> renders its own <canvas>; make sure it fills the layer
+   and inherits the no-interaction policy. */
+.root canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: none;
+}
+
+/* A soft vignette/gradient overlay tinted with the accent tokens. This is part
+   of the "atmosphere" and also the visual base of the reduced-motion fallback.
+   Low opacity so it stays low-contrast against --bg. */
+.wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      60% 50% at 18% 12%,
+      color-mix(in srgb, var(--accent) 16%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 55% at 85% 88%,
+      color-mix(in srgb, var(--accent-2) 13%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      120% 120% at 50% 50%,
+      transparent 55%,
+      color-mix(in srgb, var(--bg) 85%, #000) 100%
+    );
+}
+
+/* Static, zero-WebGL fallback used on reduced-motion. Pure CSS, animation-free.
+   A faint dotted star texture over the accent wash so the brand still reads. */
+.fallback {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 20% 18%,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 82% 84%,
+      color-mix(in srgb, var(--accent-2) 14%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--fg) 7%, transparent) 0.5px,
+      transparent 1.5px
+    ),
+    var(--bg);
+  /* tile the tiny "star" radial so it reads as a sparse field */
+  background-size: 100% 100%, 100% 100%, 26px 26px, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+}
+
+/* A single quiet brand dot for the fallback, in lieu of the 3D mark. */
+.fallbackMark {
+  position: absolute;
+  top: 14%;
+  right: 12%;
+  width: clamp(40px, 6vw, 80px);
+  height: clamp(40px, 6vw, 80px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--accent-2) 70%, var(--fg)),
+    color-mix(in srgb, var(--accent) 60%, transparent) 60%,
+    transparent 75%
+  );
+  filter: blur(0.5px);
+  opacity: 0.55;
+}
