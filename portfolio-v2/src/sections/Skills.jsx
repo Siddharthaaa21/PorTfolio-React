@@ -19,6 +19,12 @@ function labelFor(key) {
   return GROUP_LABELS[key] ?? key.charAt(0).toUpperCase() + key.slice(1);
 }
 
+function getSkillFactId(skill) {
+  if (skill === 'RAG') return 'fact-f-rag';
+  if (/AZ-900/i.test(skill)) return 'fact-f-az900';
+  return undefined;
+}
+
 /**
  * Skills — grouped, scannable skill chips (Tab 5).
  * Reads data.skills = { languages[], genai[], distributed[], cloud[], backend[], databases[] }.
@@ -44,7 +50,11 @@ export default function Skills({ data }) {
             <h3 className={s.groupLabel}>{labelFor(key)}</h3>
             <div className={s.chips}>
               {skills[key].map((skill) => (
-                <Chip key={skill} tone={key === 'genai' ? 'accent' : 'default'}>
+                <Chip
+                  id={getSkillFactId(skill)}
+                  key={skill}
+                  tone={key === 'genai' ? 'accent' : 'default'}
+                >
                   {skill}
                 </Chip>
               ))}

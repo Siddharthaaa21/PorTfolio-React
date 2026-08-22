@@ -23,6 +23,14 @@ function emphasizeMetrics(text) {
   );
 }
 
+function getProjectFactId(projectId, index) {
+  if (projectId === 'genai-app') {
+    const ids = ['fact-f-langgraph-orchestration', 'fact-f-azure-cicd', 'fact-f-rag'];
+    return ids[index];
+  }
+  return undefined;
+}
+
 /**
  * Projects — feature card for the flagship GenAI LLM application (Tab 5).
  * Reads data.projects[] = [{ id, name, stack[], period, summary, highlights[] }].
@@ -39,7 +47,7 @@ export default function Projects({ data }) {
       <div className={s.list}>
         {items.map((p, i) => (
           <Reveal key={p.id ?? i} delay={i * 0.06}>
-            <Panel as="article" className={s.card}>
+            <Panel as="article" id={`project-${p.id ?? i}`} className={s.card}>
               <span className={s.featured}>Featured</span>
 
               <div className={s.head}>
@@ -62,7 +70,9 @@ export default function Projects({ data }) {
               {p.highlights?.length ? (
                 <ul className={s.highlights}>
                   {p.highlights.map((h, hi) => (
-                    <li key={hi}>{emphasizeMetrics(h)}</li>
+                    <li key={hi} id={getProjectFactId(p.id, hi)}>
+                      {emphasizeMetrics(h)}
+                    </li>
                   ))}
                 </ul>
               ) : null}

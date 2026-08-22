@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, lazy, Suspense } from 'react';
 import s from './App.module.css';
-import { AmbientField } from './scene';
 import AgentPanel from './agent/AgentPanel.jsx';
 import apiClient from './agent/apiClient.js';
 import { Hero, Experience, Projects, Skills, Contact } from './sections';
 import profile from './content/profile.json';
+
+const AmbientField = lazy(() => import('./scene'));
 
 /**
  * App — integrated build (Tab 6).
@@ -22,9 +23,11 @@ export default function App() {
 
   return (
     <div className={s.app}>
-      {/* Ambient 3D background — reacts to the agent's tool-calls */}
+      {/* Ambient 3D background — code-split and reacts to agent tool-calls */}
       <div className={s.bg} aria-hidden="true">
-        <AmbientField />
+        <Suspense fallback={null}>
+          <AmbientField />
+        </Suspense>
       </div>
 
       <div className={s.layout}>

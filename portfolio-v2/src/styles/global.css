@@ -76,3 +76,29 @@ textarea {
   margin-inline: auto;
   padding-inline: var(--space-4);
 }
+
+/* citation anchor target animation */
+:target {
+  scroll-margin-top: calc(var(--space-6) + 20px);
+  animation: fact-target-pulse 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fact-target-pulse {
+  0% {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+    border-radius: var(--radius-sm, 6px);
+  }
+  70% {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+  100% {
+    outline: 2px solid transparent;
+    outline-offset: 4px;
+    background-color: transparent;
+  }
+}
+

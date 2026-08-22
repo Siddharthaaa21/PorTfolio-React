@@ -3,6 +3,18 @@ import Reveal from './Reveal.jsx';
 import SectionHeading from './SectionHeading.jsx';
 import s from './Experience.module.css';
 
+function getExperienceFactId(jobId, index) {
+  if (jobId === 'infosys') {
+    const ids = ['fact-f-llm-40', 'fact-f-arch-proposals', 'fact-f-guardrails', 'fact-f-agile-cicd'];
+    return ids[index];
+  }
+  if (jobId === 'bookedeat') {
+    const ids = ['fact-f-deltasync', 'fact-f-consistency'];
+    return ids[index];
+  }
+  return undefined;
+}
+
 /**
  * Experience — work history as clean cards (Tab 5).
  * Reads data.experience[] = [{ id, company, role, period, summary, highlights[], tags[] }].
@@ -19,7 +31,7 @@ export default function Experience({ data }) {
       <div className={s.list}>
         {items.map((job, i) => (
           <Reveal key={job.id ?? i} delay={i * 0.06}>
-            <Panel as="article" className={s.card}>
+            <Panel as="article" id={`experience-${job.id ?? i}`} className={s.card}>
               <div className={s.top}>
                 <div className={s.heading}>
                   <h3 className={s.role}>{job.role}</h3>
@@ -33,7 +45,9 @@ export default function Experience({ data }) {
               {job.highlights?.length ? (
                 <ul className={s.highlights}>
                   {job.highlights.map((h, hi) => (
-                    <li key={hi}>{h}</li>
+                    <li key={hi} id={getExperienceFactId(job.id, hi)}>
+                      {h}
+                    </li>
                   ))}
                 </ul>
               ) : null}

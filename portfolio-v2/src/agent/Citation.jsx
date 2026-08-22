@@ -19,9 +19,18 @@ export default function Citation({ factId, label, onSelect }) {
     if (onSelect && factId) {
       e.preventDefault();
       onSelect(factId);
+      return;
     }
-    // Without onSelect we fall through to the anchor's default #fact-<id> jump,
-    // which is a no-op until a host renders a matching target — harmless.
+    const target = document.getElementById(`fact-${factId}`);
+    if (target) {
+      e.preventDefault();
+      try {
+        window.history.pushState(null, '', `#fact-${factId}`);
+      } catch {
+        /* ignore sandbox history errors */
+      }
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   const inner = (

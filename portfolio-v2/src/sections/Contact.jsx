@@ -36,7 +36,7 @@ export default function Contact({ data, onAsk }) {
 
       <Reveal>
         <Panel className={s.card}>
-          <p className={s.lede}>
+          <p id="fact-f-availability" className={s.lede}>
             <span className={s.dot} aria-hidden="true" />
             Open to contract work — agentic AI, LLM/GenAI systems, and distributed backends.
           </p>

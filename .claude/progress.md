@@ -35,15 +35,16 @@ Status legend: ⬜ not started · 🟨 in progress · ✅ done · ⛔ blocked
 
 ---
 
-## Follow-ups (post-Phase-1, optional)
-- Fill `profile.json` `identity.links` — GitHub / LinkedIn / portfolio are still `"TODO"`.
-- Remove 6 leftover `// STUB: owned by Tab 4` fallback defaults in `sections/*` + delete `_stubData.js` (harmless dead code now that `data` is always passed).
-- Code-split the 3D scene (`React.lazy` + dynamic import) — bundle is 1.1 MB / 318 KB gzip (Three.js). Not a blocker.
-- Polish: bound `AgentPanel` height in the sticky sidebar (added `.agent` max-height — verify visually); add `id="fact-<id>"` targets so citation `#fact-<id>` links deep-scroll.
+## Follow-ups (post-Phase-1)
+- [x] Fill `profile.json` `identity.links` (GitHub, LinkedIn, Portfolio).
+- [x] Code-split the 3D scene (`React.lazy` + dynamic import) — initial bundle reduced from 1.12 MB to 290 KB (95 KB gzipped).
+- [x] Add `id="fact-<id>"` targets and `:target` animated styling so citation `#fact-<id>` links deep-scroll.
+- [x] Root `package.json` proxy scripts (`npm run dev`, `npm run build`, `npm run preview`, `npm run api`).
 - Phase 2 (DONE locally): Gemini RAG agent at `/api/agent` (`api/`), `apiClient` wired with mock fallback. **To go live:** create a free Gemini key → `.env.local`, then `npm run api` + `npm run dev`. **Remaining:** deploy `api/` as an Azure Function (same handler) for production; optional multi-turn history + LLM tool-calling.
 
 ## Changelog
 <!-- newest first; one line per milestone: YYYY-MM-DD · Tab N · what shipped -->
+- 2026-08-21 · Structure & Perf · Code-split Three.js ambient scene, added citation deep-linking targets + pulse animation, updated root package scripts and profile links
 - 2026-07-01 · Phase 2 · real-LLM pipeline built — Gemini (free) behind `/api/agent`, RAG-as-tools, NDJSON stream, `apiClient` + mock fallback; shared `retrieval.js`; frontend build green, API smoke-tested (health + events + guardrail on the fallback path); Gemini endpoint reachability confirmed (HTTP 400 w/ fake key)
 - 2026-07-01 · verify · live browser check (Playwright/headless) — all features render, 0 runtime errors, mobile reflows; caught + fixed an injection-regex guardrail gap
 - 2026-07-01 · Tab 6 · INTEGRATED — App.jsx wired, build green (1024 mods), preview HTTP 200, offline verified
