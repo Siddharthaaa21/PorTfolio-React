@@ -34,26 +34,22 @@ portfolio-v2/
 BUILD-PROMPTS.md  The 6 copy-paste tab prompts
 ```
 
-## The Parallel Build (6 tabs)
-Ownership + run order live in [.claude/tabs.md](.claude/tabs.md). In one line:
-**Tab 1 scaffolds → Tabs 2–5 build in parallel → Tab 6 integrates.** Each tab owns a folder and never edits another's.
+## Dynamic TDD Multi-Agent Workflow
+For active development and new features:
+1. **Milestone Planner (`milestone-planner`)**: Decomposes user goals into testable milestones & branch prompts.
+2. **TDD Developer (`tdd-developer`)**: Operates on branch workspaces adhering to **Red -> Green -> Refactor**.
+3. **QA & Validator (`qa-validator`)**: Runs test suite (`npm test`), verifies contracts, and clears merges.
+Details -> [.claude/workflow.md](.claude/workflow.md).
 
 ## Golden Rules
-1. **Stay in your lane.** Only edit files your tab owns (see `.claude/tabs.md`). Need another tab's file? Stub it: `// STUB: owned by Tab N — remove on integration`.
-2. **The contract is law.** Folder ownership, the `profile.json` schema, the agent **event protocol**, and `sceneBus` are frozen in `.claude/contract.md`. Don't change a shared shape unilaterally — if you must, log it in `.claude/mistakes.md` **and** `.claude/decisions.md`.
+1. **TDD First.** Write failing unit/integration tests before writing implementation code.
+2. **The contract is law.** Folder ownership, the `profile.json` schema, the agent **event protocol**, and `sceneBus` are frozen in `.claude/contract.md`.
 3. **First person.** The agent always speaks **as Siddhartha** ("I built…", "I led…").
-4. **Phase 1 is offline.** No API key, no network calls. The mock must *feel* real.
-5. **Token-driven styling.** No hardcoded colors/spacing — use the CSS vars in `tokens.css`.
+4. **Token-driven styling.** No hardcoded colors/spacing — use the CSS vars in `tokens.css`.
+5. **Continuous Verification.** Always verify with `npm test` (Vitest) and `npm run build` before completing a milestone.
 
-## Logging protocol — so we can review what the agents did
-- **Finished a milestone?** Append a dated entry to `.claude/progress.md` (what you built, files touched, status) — or run `/sync-progress`.
-- **Hit a bug, a contract gap, or made a wrong turn?** Append to `.claude/mistakes.md` using the template — or run `/log-mistake`. This is how we stop the same error recurring across tabs.
-- **Made a non-obvious choice?** Add an entry to `.claude/decisions.md`.
+## Commands & checks (run from root or `portfolio-v2/`)
+- Test: `npm test` (run Vitest suite) · `npm run test:watch`
+- Dev: `npm run dev` · Build: `npm run build` · Preview: `npm run preview`
+- API Dev Server: `npm run api`
 
-## Review workflow (agent-dev)
-- Run the **`contract-guardian`** subagent to check a tab's output against the contract **before** integration.
-- Run the **`integration-reviewer`** subagent during Tab 6.
-
-## Commands & checks (`portfolio-v2/`)
-- Dev `npm run dev` · Build `npm run build` · Preview `npm run preview`
-- Lint/format: set up by Tab 1 (TODO — record the exact command here once it exists).
