@@ -63,7 +63,7 @@ export const OFFTOPIC =
 /** Route the question to the tool name(s) the trace will show. */
 export function pickTools(message) {
   const m = String(message).toLowerCase();
-  if (/\b(fit|hire|contract|role|job|available|work with|engage|good for)\b/.test(m)) return ['match_role'];
+  if (/\b(fit|hire|contract|role|job|available|work with us|work together|engage|good for)\b/.test(m)) return ['match_role'];
   if (/\b(project|langgraph|genai|app|built|build|azure|deploy|orchestrat|pipeline)\b/.test(m))
     return ['retrieve_project', 'search_experience'];
   return ['search_experience'];

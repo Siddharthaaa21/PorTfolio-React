@@ -7,6 +7,7 @@
     "start": "npm --prefix portfolio-v2 run dev",
     "build": "npm --prefix portfolio-v2 run build",
     "preview": "npm --prefix portfolio-v2 run preview",
+    "test": "npm --prefix portfolio-v2 run test",
     "api": "npm --prefix portfolio-v2 run api"
   }
 }
