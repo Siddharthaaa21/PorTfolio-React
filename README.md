@@ -1,70 +1,143 @@
-# Getting Started with Create React App
+# Siddhartha Arora — AI-Agent Concierge Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-6366f1?style=for-the-badge&logo=github)](https://siddharthaaa21.github.io/PorTfolio-React/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22d3ee?style=for-the-badge)](LICENSE)
+[![React](https://img.shields.io/badge/React_18-Vite-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-R3F-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
+[![Tests: Vitest](https://img.shields.io/badge/Tests-Vitest-success?style=for-the-badge&logo=vitest)](https://vitest.dev/)
 
-## Available Scripts
+An **interactive AI-agent concierge** personal portfolio: a first-person agent answers questions about Siddhartha over his résumé data, displaying a **visible reasoning trace** (plan → tool calls → grounded response), accompanied by an **ambient Three.js 3D background** that dynamically pulses when agent tools fire.
 
-In the project directory, you can run:
+Built with **React 18**, **Vite**, **React Three Fiber / Drei**, **Framer Motion**, and **Vitest**.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Key Highlights
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* **🤖 First-Person AI Concierge**: Speaks as Siddhartha (*"I built...", "I led..."*) with live streaming responses and anti-prompt injection guardrails.
+* **🧠 Dual-Brain Architecture**: Seamlessly streams from Google Gemini 2.0 via serverless NDJSON, with automatic fallback to an offline RAG-lite brain ($0 cost, no API keys needed for preview).
+* **🌌 Reactive 3D Ambient Scene**: Three.js particle starfield and distorted icosahedron that pulse in response to agent tool-calls via an event bus (`sceneBus`). Code-split for fast initial page load (95 kB gzipped).
+* **🎭 Multi-Persona Switching**:
+  * **Recruiter**: Fit, outcomes, metrics, and contract availability.
+  * **Engineer**: System architecture, delta-sync consistency, and tech stack trade-offs.
+  * **Founder**: ROI, velocity, and delivery speed in 2-week Agile sprints.
+* **🔗 Provenance & Citation Deep-Linking**: Clickable citation tags (e.g. `[Infosys · resume]`) that smooth-scroll and pulse-highlight the referenced résumé bullet.
+* **🧪 Test-Driven Development (TDD)**: Verified with automated unit tests for keyword scoring, synonym hints, prompt-injection defenses, and citation interactions.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🏛️ System Architecture
 
-### `npm run build`
+```mermaid
+flowchart TD
+    subgraph UI ["Client UI (portfolio-v2)"]
+        User(["Visitor Prompt / Suggested Chips / Persona Toggle"]) --> AgentPanel["AgentPanel.jsx"]
+        AgentPanel --> useAgent["useAgent.js (State Machine)"]
+        useAgent --> ReasoningTrace["ReasoningTrace.jsx (Live Plan & Tools)"]
+        useAgent --> MessageList["MessageList.jsx (Streamed Tokens)"]
+        useAgent --> Citation["Citation.jsx (Deep-Linking to #fact-id)"]
+    end
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    subgraph Bus ["Cross-Cutting Event Bus"]
+        useAgent -- "emit('tool-call')" --> sceneBus["sceneBus.js"]
+        sceneBus --> AmbientField["3D AmbientField.jsx (Particle Bursts)"]
+    end
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    subgraph Backend ["Dual-Brain Layer"]
+        useAgent --> apiClient["apiClient.js"]
+        apiClient -- "Live Server (/api/agent)" --> Gemini["api/agent.mjs (Gemini 2.0 LLM)"]
+        apiClient -- "Offline Fallback ($0 cost)" --> Mock["mockClient.js (Deterministic RAG)"]
+        
+        Gemini --> RAG["retrieval.js + profile.json + personas.js"]
+        Mock --> RAG
+    end
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀 Quick Start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Run Offline (Zero Configuration, $0)
+Clone the repository and start the development server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Clone repository
+git clone https://github.com/Siddharthaaa21/PorTfolio-React.git
+cd PorTfolio-React
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Install dependencies and start
+npm install --prefix portfolio-v2
+npm run dev
+```
+Open **[http://localhost:5173](http://localhost:5173)**. The agent runs automatically on the offline RAG brain.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 2. Run with Live Gemini LLM (Optional)
+To connect the agent to a live LLM:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Obtain a free API key from [Google AI Studio](https://aistudio.google.com/apikey).
+2. Create `portfolio-v2/.env.local`:
+   ```bash
+   cp portfolio-v2/.env.example portfolio-v2/.env.local
+   # Add your GEMINI_API_KEY inside .env.local
+   ```
+3. Start the local serverless handler and dev server:
+   ```bash
+   # Terminal 1: Starts local agent API host on :8787
+   npm run api
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   # Terminal 2: Starts frontend dev server (proxies /api to :8787)
+   npm run dev
+   ```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🧪 Testing & Verification
 
-### Analyzing the Bundle Size
+Run unit and integration test suites using Vitest:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+# Run test suite
+npm test
 
-### Making a Progressive Web App
+# Run tests in watch mode
+npm run test:watch --prefix portfolio-v2
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 📁 Repository Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+.
+├── portfolio-v2/                 # Modern React 18 + Vite application
+│   ├── src/
+│   │   ├── scene/                # Ambient Three.js starfield + 3D icon
+│   │   ├── agent/                # AgentPanel, ReasoningTrace, Citations, RAG retrieval
+│   │   │   └── __tests__/        # Automated Vitest unit test suites
+│   │   ├── content/              # profile.json (résumé data) & personas.js
+│   │   ├── sections/             # Hero, Experience, Projects, Skills, Contact
+│   │   ├── ui/                   # Design token primitives (Button, Chip, Panel)
+│   │   └── styles/               # tokens.css & global.css
+│   ├── api/                      # Serverless agent handler (api/agent.mjs)
+│   └── vite.config.js            # Vite & Vitest configuration
+├── .claude/                      # Multi-agent system specifications & workflow
+├── .github/workflows/deploy.yml  # Automated GitHub Pages CI/CD workflow
+├── LICENSE                       # MIT License
+└── package.json                  # Root proxy scripts
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🚢 Deployment
 
-### `npm run build` fails to minify
+The portfolio is automatically built and deployed to **GitHub Pages** via GitHub Actions on every push to `main`:
+* Deployment Workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+* Live Site: [https://siddharthaaa21.github.io/PorTfolio-React/](https://siddharthaaa21.github.io/PorTfolio-React/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
