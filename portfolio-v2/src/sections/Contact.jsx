@@ -8,9 +8,8 @@ import s from './Contact.module.css';
 const LINK_META = {
   github: { label: 'GitHub', handle: (u) => prettify(u) },
   linkedin: { label: 'LinkedIn', handle: (u) => prettify(u) },
-  portfolio: { label: 'Portfolio', handle: (u) => prettify(u) },
 };
-const LINK_ORDER = ['github', 'linkedin', 'portfolio'];
+const LINK_ORDER = ['github', 'linkedin'];
 
 function isReal(url) {
   return typeof url === 'string' && url.trim() && url.trim().toUpperCase() !== 'TODO';
